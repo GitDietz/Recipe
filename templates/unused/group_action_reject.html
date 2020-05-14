@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if no_delete %}
+
+    <div>{{ no_delete }}</div>
+    <br>
+{% endif %}
+<a href="{% url 'group_list' %}">Back to Group list</a>
+{% endblock %}

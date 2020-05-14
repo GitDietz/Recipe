@@ -1,0 +1,222 @@
+from django import forms
+from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+from django.contrib.auth import (
+    authenticate,
+    get_user_model,
+    login,
+    logout,
+    )
+from django.db.models import Q
+
+# from .models import InvitationKey
+# from the_list.models import ShopGroup
+import logging
+
+#
+# class InvitationAcceptForm(forms.Form):
+#     first_name = forms.CharField(label='Your first Name - other members will see this', required=True)
+#     last_name = forms.CharField(label='Your last Name', required=True)
+#     password = forms.CharField(max_length=32, widget=forms.PasswordInput)
+#
+#     class Meta:
+#         # model = InvitationKey
+#         fields = ['first_name',
+#                   'last_name,'
+#                   'password']
+#
+#
+# class InvitationKeyForm(forms.ModelForm):
+#     email = forms.EmailField()
+#     invite_name = forms.CharField(label="Your friend's name", required=True)
+#
+#     class Meta:
+#         model = InvitationKey
+#         fields = [
+#             'email',
+#             'invite_name',
+#             'invite_to_group',
+#         ]
+#
+#     def __init__(self, user, *args, **kwargs):
+#         """ this limits the selection options to only the lists managed by the user"""
+#         super(InvitationKeyForm, self).__init__(*args, **kwargs)
+#         managed_groups = ShopGroup.objects.managed_by(user)
+#         self.fields['invite_to_group'].queryset = managed_groups
+#
+#     def clean_email(self):
+#         return self.cleaned_data['email']
+#
+#     def clean_invite_to_group(self):
+#         return self.cleaned_data['invite_to_group']
+#
+#     def clean_invite_name(self):
+#         return self.cleaned_data['invite_name']
+#
+#
+# class InvitationSelectForm(forms.ModelForm):
+#     # invite_choices = [('1', 'Accept'), ('2', 'Decline')]
+#     # choice = forms.ChoiceField(widget=forms.RadioSelect, choices=invite_choices)
+#
+#     class Meta:
+#         model = InvitationKey
+#         fields = ['invite_to_group']
+#
+#
+# class UserLoginForm(forms.Form):
+#     username = forms.CharField()
+#     password = forms.CharField(widget=forms.PasswordInput)
+#
+#     def clean(self, *args, **kwargs):
+#         username = self.cleaned_data.get('username')
+#         password = self.cleaned_data.get('password')
+#         print(f'Attempt to login {username}')
+#         # possible to use
+#         # user_qs = User.objects.filter(username=username)
+#         # if user_qs.count ==1:
+#         #     user = user_qs.first()
+#         if username and password:
+#             qs = User.objects.filter(username=username)
+#             if qs.count() == 1:
+#                 known_user = True
+#             else:
+#                 known_user = False
+#
+#             if not known_user:
+#                 print('unknown user')
+#                 raise ValidationError("This user does not exist")
+#             else:
+#                 user = authenticate(username=username, password=password)
+#                 if not user:
+#                     print('passw fault')
+#                     raise ValidationError("The password is very incorrect")
+#                 else:
+#                     print('knwon user')
+#                     if not user.is_active:
+#                         raise ValidationError("This user is not active")
+#         return super(UserLoginForm, self).clean(*args, **kwargs)
+#
+#
+# class UserLoginEmailForm(forms.Form):
+#     """
+#     User login using email and not username
+#     """
+#     email = forms.CharField()
+#     username = forms.CharField(widget=forms.HiddenInput)
+#     password = forms.CharField(widget=forms.PasswordInput)
+#
+#     def clean_username(self):
+#         # print(self._errors)
+#         return 'user_name'
+#
+#     def clean(self, *args, **kwargs):
+#         cleaned_data = super(UserLoginEmailForm, self).clean()
+#         email = self.cleaned_data.get('email')
+#         password = self.cleaned_data.get('password')
+#         if self.errors['username']:
+#             del self.errors['username']
+#         logging.getLogger("info_logger").info(f'Attempt to login {email}')
+#         if email and password:
+#             qs = User.objects.filter(email=email).first()
+#             if qs:
+#                 username = qs.username
+#                 cleaned_data['username'] = username
+#                 user = authenticate(username=username, password=password)
+#                 if not user:
+#                     logging.getLogger("info_logger").info('password fault')
+#                     raise ValidationError("The password is incorrect")
+#                 else:
+#                     logging.getLogger("info_logger").info('known user')
+#                     if not user.is_active:
+#                         raise ValidationError("This user is not active")
+#             else:
+#                 logging.getLogger("info_logger").info('unknown user')
+#                 raise ValidationError('no such email')
+#
+#         return cleaned_data
+#
+#
+# class UserRegisterForm(forms.ModelForm):
+#     email = forms.EmailField(label='Email Address', required=True)  # overrides the default
+#     email2 = forms.EmailField(label='Confirm Email')
+#     first_name = forms.CharField(label='First Name (will display for others)', required=True)
+#     last_name = forms.CharField(label='Last Name', required=True)
+#     password = forms.CharField(widget=forms.PasswordInput)
+#     joining = forms.CharField(label='Group to create', max_length=100)
+#     purpose = forms.CharField(label='What is this group for?', max_length=200)
+#
+#     class Meta:
+#         model = User
+#         fields = [
+#             # 'username',
+#             'email',
+#             'email2',
+#             'first_name',
+#             'last_name',
+#             'password',
+#             'joining',
+#             'purpose'
+#         ]
+#         # widgets = {'username': forms.HiddenInput()}
+#         # initial = {'username': 'user1'}
+#     # possible to use a form level clean similar to the class above -
+#     # validation will then show on the form itself and not the field
+#
+#     def clean_email2(self):  # this is 2 so it runs off the email2 field
+#         email = self.cleaned_data.get('email')
+#         email2 = self.cleaned_data.get('email2')
+#         print(f'first is {email}, second is {email2}')
+#         if email != email2:
+#             raise ValidationError('Emails are not the same')
+#
+#         email_qs = User.objects.filter(email=email)
+#         if email_qs.exists():
+#             raise ValidationError('Emails already exists for a user, please enter another one')
+#
+#         # return super(UserRegisterForm, self).clean()
+#         return email2
+#
+#
+#     def clean_joining(self):
+#         target_group = self.cleaned_data.get('joining')
+#         # now check that the group does not exists and create it, rather do this in the form
+#         qs_shop_group = ShopGroup.objects.all()
+#         this_found = qs_shop_group.filter(Q(name__iexact=target_group))
+#         if this_found.exists():
+#             raise ValidationError('That group already exists, please enter another name')
+#
+#         # return super(UserRegisterForm, self).clean()
+#         return target_group
+#
+#
+#     # def clean_username(self):
+#     #     uname = self.cleaned_data.get('username')
+#     #     print('in the username clean')
+#     #     last_name = self.cleaned_data.get('first_name')
+#     #     new_username = self.cleaned_data.get('first_name') + min(last_name[:2],'')
+#     #     this_user = User.objects.all().filter(Q(username__iexact=new_username))
+#     #     i=1
+#     #     while this_user.exists():
+#     #         this_user + str(i)
+#     #         i+=1
+#     #     return new_username
+#
+#
+# class ResetForm(forms.Form):
+#     password = forms.CharField(widget=forms.PasswordInput)
+#     password2 = forms.CharField(widget=forms.PasswordInput)
+#
+#     class Meta:
+#         fields = [
+#             'password',
+#             'password2'
+#         ]
+#
+#     def clean_password2(self):
+#         password = self.cleaned_data.get('password')
+#         password2 = self.cleaned_data.get('password2')
+#         print(f'first is {password}, second is {password2}')
+#         if password != password2:
+#             raise ValidationError('Passwords are not the same')
+#
+#         return password2

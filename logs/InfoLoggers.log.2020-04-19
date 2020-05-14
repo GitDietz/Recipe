@@ -1,0 +1,19 @@
+2020-04-19 15:04:59,409  INFO [views-login_email] entry to view
+2020-04-19 15:11:18,302  INFO [views-login_email] entry to view
+2020-04-19 15:11:22,162  INFO [views-login_email] entry to view
+2020-04-19 15:11:24,230  INFO [views-login_email] entry to view
+2020-04-19 15:11:34,760  INFO [views-login_email] entry to view
+2020-04-19 15:12:20,250  INFO [views-book_list] user = 
+2020-04-19 15:16:44,638  INFO [views-book_list] user = 
+2020-04-19 15:17:50,239  INFO [views-book_list] user = 
+2020-04-19 15:19:06,590  INFO [views-book_list] user = 
+2020-04-19 15:25:54,388  INFO [views-book_list] user = 
+2020-04-19 15:25:56,214  INFO [views-book_list] user = 
+2020-04-19 15:26:26,049  INFO [views-book_list] user = 
+2020-04-19 15:26:41,438  INFO [views-book_create] from submitted
+2020-04-19 15:26:41,445  INFO [views-book_list] user = 
+2020-04-19 15:29:09,129  INFO [views-book_list] user = 
+2020-04-19 15:29:45,393  INFO [views-book_list] user = 
+2020-04-19 15:30:23,546  INFO [views-book_list] user = 
+2020-04-19 16:28:24,157  INFO [views-book_list] user = 
+2020-04-19 19:03:13,014  INFO [views-book_list] user = 

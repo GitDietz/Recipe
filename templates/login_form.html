@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="col-sm-6 col-sm-offset-3">
+<h2>Site {{ title }}</h2>
+
+    <form method='POST' action="" >
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type='submit' class="btn btn-secondary" value = {{ title }}>
+        {% if mode == 'pw_reset' %}
+        <br><p>Forgotten password?<br>
+        Ensure the email field contains your correct email address and we'll send you a link to reset it</p>
+        <input type='submit' class="btn btn-secondary" name="reset" value = 'Reset Password'/>
+        {% endif %}
+    </form>
+</div>
+{% endblock content%}

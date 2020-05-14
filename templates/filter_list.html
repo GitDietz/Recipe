@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+!!!!! temp item list !!!!!!
+  <form method="get">
+    {{ object_list.form.as_p }}
+    <button type="submit">Filter</button>
+  </form>
+  <ul>
+  {% for obj in object_list.qs %}
+    <div class="row p-1 mb-2 bg-light text-dark">
+        <div class="col-md-8 col-xs-8">{{ obj.name }}
+
+
+        </div>
+        <div class="col-md-4 col-xs-4">
+            {{ obj.in_book }}
+        </div>
+    </div>
+  {% endfor %}
+  </ul>
+
+{% endblock content %}

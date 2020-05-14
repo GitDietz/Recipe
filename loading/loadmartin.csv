@@ -1,0 +1,70 @@
+name, description, main_ingredient, category, page
+french onion soup, typical french, onion, soup,17
+split pea soup, with ham, dried peas, soup,18
+artichoke soup, pernod,artichoke, soup,20
+cep tart, cream,mushrooms, starter,22
+pork terrine, apricots and pistacio,pork,starter,22
+confit duck rosti, potato/truffle,duck, starter,23
+crudites with anchovy dip, peppers/tomato, anchovies, starter,28
+duck rillettes with fig and peach,figs/peaches,duck,starter,30
+bakes eggs, ham,eggs,breakfast,33
+smoked salmon and cheddar omellette, eggs/cheese, salmon,starter,34
+gin and tonic battered onion rings,prawns/peaches/gin/tonic, onion, starter,35
+pumpkin gruyere brioche bake,gruyere/eggs,pumpkin, lunch,39
+chicken livers and mushrooms on toast,mushroom/brandy/mustard/cream,chicken liver,starter,40
+croque monsieur, cheese/bread,ham,snack,41
+scallops st jaques, potatoes/egg/carrot/leek/celery/cream,scallop,fish,46
+bbq seafood parcels, mixed seefood, seafood,fish,49
+panfried skate wing, lemon/capers,skate wing,seafood,50
+moules mariniere,onion/cream,mussels,seafood,52
+pan-fried scallops,beans/chorizo,scallops, seafood,54
+bbq red mullet, mint/pumpkin, mullet,seafood,55
+lobster tagliatelle, tomato/cream/brandy,lobster,seafood/pasta,58
+john dory baked, courgettes/tomatoes/clams, fish, seafood,61
+fish with sauce vierge, olive oil/tomato/garlic/got to try,fish,seafood,62
+salt baked fish,eggs/salt/lemon, fish, seafood,64
+trout with almonds and beans,almonds/beans,trout,seafood,67
+clams with fennel and chive,fennel/cream/tomato,clams,seafood,68
+steamed ling,courgette/spanch/butter,fish,seafood,70
+Sole with tartare sauce,eggs/mayo/gerkin,fish,seafood,71
+fish and crayfish with bisque,fennel/brandy,fish,seafood,74
+lamb cutlets,tomato/olive/anchovy,lamb,meat,78
+sausages with puy lentils,ham/carrot/celery/lentils,sausage,meat,80
+pork with vichy carrots,carrots,pork, meat,81
+steak with pepper sauce, ,steak, meat,84
+steak with mushroom, mushroom,steak,meat,87
+pork escalopes, potatoes/onion,pork,meat,90
+lamb with seared lettuce,lettuce/peas/mint,lamb,meat,94
+steak with treacle glaze, treacle,steak,meat,98
+veal and mustard sauce,potatoes,veal,meat,99
+steak bordelais sauce,red wine/stock,steak,meat,102
+beef bourguignon,ham/onion/stock/onion/mushroom,beef,meat,106
+black pudding,apple,black pudding,meat,108
+bbq duck with chutney,apple/pear,duck,meat,112
+chicken blanchette, stock/onion/mushroom/eggs, chicken,meat,115
+pheasant breast,stock/onion/port,pheasant,meat,118
+confit duck,beans/tomato/mushroom,duck,meat,120
+chicken with vinegar and tarragon,potato/stock,chicken,meat,123
+rabbit with mustard sauce, stock/port/cream,rabbit,meat,129
+roast duck with vinegar and plums,vinegar,duck,meat,130
+coq au vin,onions/bacon/mushrrom,chicken,meat,132
+leeks vinaigrette,vinegar,leeks,veg,136
+celeriac,apple,celeriac,veg,138
+sausage chicory and brioche salad,brioche,sausage,salad,139
+gratin dauphinois,cream,potatoes,veg,142
+french dressing,honey/vinegar,,dressing,146
+red wine dressing,mustard/oil,,dressing,146
+blue cheese dressing,blue cheese/sour cream,,dressing,146
+salad nicqoise,tuna/potatoes/beans/lettuce/onion/olive,tuna,salad,148
+egg and bacon salad,bacon/egg/salad,egg,salad,151
+pain au chocolat,butterflour/chocolate,flour,pastry,156
+apple tart, aprocot jam/apples/pastry,apple,pasty,160
+pear tarte tatin,flour/butter/pears/cream,pear,pastry,161
+bakes custard tart,cream/eggs/sugar,flour,pastry,162
+honey cake,honey/butter/eggs/flour,flour,pastry,166
+meringues,egg/sugar/chocolate,eggs,pastry,168
+fruit tart,pastry/fruits/cream,pastry,pastry,174
+crepes suzette,eggs/milk/orange,orange,dessert,178
+raspberry slice,milk,raspberry,dessert,180
+cholocate mousse,eggs/sugar,chocolate,dessert,183
+creme brulee,eggs/cream,cream,dessert,184

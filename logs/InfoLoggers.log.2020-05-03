@@ -1,0 +1,13 @@
+2020-05-03 12:16:33,861  INFO [views-book_list] user = 
+2020-05-03 12:16:41,274  INFO [views-book_list] user = 
+2020-05-03 15:41:28,565  INFO [views-logout_view] logging out SuperAdmin
+2020-05-03 15:41:33,719  INFO [views-logout_view] logging out SuperAdmin
+2020-05-03 15:41:38,969  INFO [views-book_list] user = SuperAdmin
+2020-05-03 15:41:41,432  INFO [views-book_list] user = SuperAdmin
+2020-05-03 15:41:53,069  INFO [views-logout_view] logging out SuperAdmin
+2020-05-03 15:42:05,327  INFO [views-logout_view] logging out SuperAdmin
+2020-05-03 15:42:10,543  INFO [views-book_list] user = SuperAdmin
+2020-05-03 15:42:10,574  INFO [views-book_list] user = SuperAdmin
+2020-05-03 21:08:31,723  INFO [views-book_list] user = SuperAdmin
+2020-05-03 21:09:37,996  INFO [views-book_create] from submitted
+2020-05-03 21:09:38,012  INFO [views-book_list] user = SuperAdmin

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<h2>Support Request</h2>
+<br>
+<p>If you are experiencing problems with users not having access to the groups or any other issues please detail it below</p>
+{% if form_option != 'lodge' %}
+    <p>{{ message_content }}</p>
+    <br>
+    <a href="{% url 'shop:shop_list' %}">Return to your list</a>
+
+{% else %}
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" value="Submit Support Ticket" />
+    </form>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% autoescape off %}
+    Hallo<br>
+
+{% if status %}
+    {% if status == 'expired' %}
+        The link you used is either expired or invalid.<br>
+        Please use contact the sender {{ sender }} to create a new invite for you.
+    {% elif status == 'invalid' %}
+        The link you used is invalid.<br>
+        Please contact the person that invited you, or register yourself for a new group using the "register" link<br>
+        <a href="{% url 'register' %}">Register</a>
+    {% elif status == 'used' %}
+        The link you used was already used.<br>
+        Please use contact the sender {{ sender }} to create a new invite for you.
+    {% endif %}
+{% endif %}
+{% endautoescape %}
+    <br><a href="{% url 'home' %}">Back to Home page</a>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load customtags %}
+{% block content %}
+
+<h1>{{ title }}</h1>
+
+<p class="font-italic">{% if notice %}{{ notice }}{% endif %}</p>
+  <form method="get">
+    {{ filter_form.form.as_p }}
+    <button type="submit">Filter</button>
+  </form>
+{% if object_list%}
+
+{% for obj in object_list %}
+    <div class="row p-1 mb-2 bg-light text-dark">
+        <div class="col-md-8 col-xs-8">{{ obj.name }}
+
+
+        </div>
+        <div class="col-md-4 col-xs-4">
+            {{ obj.in_book }}
+        </div>
+    </div>
+{% endfor %}
+
+{% else %}
+    <p>No list yet!</p>
+{% endif %}
+
+{% if object_list.has_other_pages %}
+  <ul class="pagination pagination-sm">
+    {% if object_list.has_previous %}
+      <!--<li class="page-item"><a class="page-link" href="?page={{ object_list.previous_page_number }}">&laquo; </a></li>-->
+      <li class="page-item">
+          <a class="page-link" href="? {% param_replace page=object_list.previous_page_number %}">Previous</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1">Previous</a>
+      </li>
+    {% endif %}
+    {% for i in object_list.paginator.page_range %}
+      {% if object_list.number == i %}
+        <li class="page-item active">
+            <span class="page-link">{{ i }}<span class="sr-only">(current)</span>
+            </span>
+      {% else %}
+        <li class="page-item"><a class="page-link"  href="?{% param_replace page=i %}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if object_list.has_next %}
+      <li class="page-item">
+          <a class="page-link" href="? {% param_replace page=object_list.next_page_number %}">Next</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1">Next</a>
+      </li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+{% endblock content %}

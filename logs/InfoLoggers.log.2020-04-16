@@ -1,0 +1,274 @@
+2020-04-16 19:07:26,202  INFO [views-shop_list] view entry | user = SergeiSee
+2020-04-16 19:07:26,250  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:07:26,250  INFO [views-get_session_list_choice] session value = 7
+2020-04-16 19:07:26,291  INFO [views-shop_list] active list is Climbers | user = SergeiSee
+2020-04-16 19:07:26,291  INFO [views-is_user_leader] user = SergeiSee
+2020-04-16 19:07:26,295  INFO [views-is_user_leader]  user is not leader
+2020-04-16 19:07:28,697  INFO [views-user_group_select] user = SergeiSee
+2020-04-16 19:07:28,698  INFO [views-user_group_select] get the lists the user is member of
+2020-04-16 19:07:28,701  INFO [views-user_group_select] list of groups <QuerySet [<ShopGroup: Muppets>, <ShopGroup: New Cledonians>, <ShopGroup: Climbers>]>
+2020-04-16 19:07:30,319  INFO [views-user_group_select] user = SergeiSee
+2020-04-16 19:07:30,319  INFO [views-user_group_select] get the lists the user is member of
+2020-04-16 19:07:30,324  INFO [views-user_group_select] list of groups <QuerySet [<ShopGroup: Muppets>, <ShopGroup: New Cledonians>, <ShopGroup: Climbers>]>
+2020-04-16 19:07:30,324  INFO [views-user_group_select] selected list is 8
+2020-04-16 19:07:30,362  INFO [views-shop_list] view entry | user = SergeiSee
+2020-04-16 19:07:30,364  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:07:30,364  INFO [views-get_session_list_choice] session value = 8
+2020-04-16 19:07:30,369  INFO [views-shop_list] active list is New Cledonians | user = SergeiSee
+2020-04-16 19:07:30,369  INFO [views-is_user_leader] user = SergeiSee
+2020-04-16 19:07:30,372  INFO [views-is_user_leader]  user is leader
+2020-04-16 19:07:31,900  INFO [views-shop_create] view entered | user = SergeiSee
+2020-04-16 19:07:31,900  INFO [views-get_user_list_property] get multiple properties | user = SergeiSee
+2020-04-16 19:07:31,901  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:07:31,901  INFO [views-get_session_list_choice] session value = 8
+2020-04-16 19:07:31,908  INFO [views-get_user_list_property] active list is New Cledonians
+2020-04-16 19:07:36,099  INFO [views-shop_create] view entered | user = SergeiSee
+2020-04-16 19:07:36,100  INFO [views-get_user_list_property] get multiple properties | user = SergeiSee
+2020-04-16 19:07:36,100  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:07:36,100  INFO [views-get_session_list_choice] session value = 8
+2020-04-16 19:07:36,105  INFO [views-get_user_list_property] active list is New Cledonians
+2020-04-16 19:07:36,106  INFO [views-shop_create] form valid | user = SergeiSee
+2020-04-16 19:07:36,124  INFO [views-shop_create] item will be added | user = SergeiSee
+2020-04-16 19:07:36,124  INFO [views-shop_create] item saving for vendor = None
+2020-04-16 19:07:38,773  INFO [views-shop_list] view entry | user = SergeiSee
+2020-04-16 19:07:38,776  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:07:38,776  INFO [views-get_session_list_choice] session value = 8
+2020-04-16 19:07:38,780  INFO [views-shop_list] active list is New Cledonians | user = SergeiSee
+2020-04-16 19:07:38,780  INFO [views-is_user_leader] user = SergeiSee
+2020-04-16 19:07:38,783  INFO [views-is_user_leader]  user is leader
+2020-04-16 19:07:42,738  INFO [views-shop_list] view entry | user = SergeiSee
+2020-04-16 19:07:42,741  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:07:42,741  INFO [views-get_session_list_choice] session value = 8
+2020-04-16 19:07:42,745  INFO [views-shop_list] active list is New Cledonians | user = SergeiSee
+2020-04-16 19:07:42,746  INFO [views-is_user_leader] user = SergeiSee
+2020-04-16 19:07:42,748  INFO [views-is_user_leader]  user is leader
+2020-04-16 19:07:42,749  INFO [views-shop_list] form submitted | user = SergeiSee
+2020-04-16 19:07:42,749  INFO [views-shop_list] which item to purchase or cancel | user = SergeiSee
+2020-04-16 19:07:42,752  INFO [views-shop_list] purchased item 4
+2020-04-16 19:07:44,446  INFO [views-shop_list] view entry | user = SergeiSee
+2020-04-16 19:07:44,448  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:07:44,449  INFO [views-get_session_list_choice] session value = 8
+2020-04-16 19:07:44,452  INFO [views-shop_list] active list is New Cledonians | user = SergeiSee
+2020-04-16 19:07:44,453  INFO [views-is_user_leader] user = SergeiSee
+2020-04-16 19:07:44,455  INFO [views-is_user_leader]  user is leader
+2020-04-16 19:07:44,456  INFO [views-shop_list] form submitted | user = SergeiSee
+2020-04-16 19:07:44,456  INFO [views-shop_list] which item to purchase or cancel | user = SergeiSee
+2020-04-16 19:07:44,460  INFO [views-shop_list] to cancel item 7
+2020-04-16 19:07:46,019  INFO [views-shop_detail] user = SergeiSee
+2020-04-16 19:07:51,229  INFO [views-shop_detail] user = SergeiSee
+2020-04-16 19:07:51,238  INFO [views-shop_detail] Posted form | user = SergeiSee
+2020-04-16 19:07:51,239  INFO [views-shop_detail] valid form submitted | user = SergeiSee
+2020-04-16 19:07:51,267  INFO [views-shop_list] view entry | user = SergeiSee
+2020-04-16 19:07:51,270  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:07:51,270  INFO [views-get_session_list_choice] session value = 8
+2020-04-16 19:07:51,275  INFO [views-shop_list] active list is New Cledonians | user = SergeiSee
+2020-04-16 19:07:51,275  INFO [views-is_user_leader] user = SergeiSee
+2020-04-16 19:07:51,277  INFO [views-is_user_leader]  user is leader
+2020-04-16 19:08:07,836  INFO [views-group_list] user = SergeiSee
+2020-04-16 19:08:10,962  INFO [views-group_maintenance] user = SergeiSee| id = 8
+2020-04-16 19:08:17,465  INFO [views-group_make_leader] group = 8, user to add as leader = 9
+2020-04-16 19:08:17,486  INFO [views-group_maintenance] user = SergeiSee| id = 8
+2020-04-16 19:08:24,876  INFO [views-group_remove_leader] group = 8, user to remove as leader = 9
+2020-04-16 19:08:24,898  INFO [views-group_maintenance] user = SergeiSee| id = 8
+2020-04-16 19:08:53,250  INFO [views-group_remove_member] group = 8, user to remove as member = 2
+2020-04-16 19:08:53,298  INFO [views-group_maintenance] user = SergeiSee| id = 8
+2020-04-16 19:09:13,410  INFO [views-merchant_list] user = SergeiSee
+2020-04-16 19:09:13,410  INFO [views-get_user_list_property] get multiple properties | user = SergeiSee
+2020-04-16 19:09:13,411  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:09:13,411  INFO [views-get_session_list_choice] session value = 8
+2020-04-16 19:09:13,414  INFO [views-get_user_list_property] active list is New Cledonians
+2020-04-16 19:09:20,923  INFO [views-merchant_update] form submitted
+2020-04-16 19:09:20,931  INFO [views-merchant_update] complete - direct to list
+2020-04-16 19:09:20,948  INFO [views-merchant_list] user = SergeiSee
+2020-04-16 19:09:20,948  INFO [views-get_user_list_property] get multiple properties | user = SergeiSee
+2020-04-16 19:09:20,949  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:09:20,949  INFO [views-get_session_list_choice] session value = 8
+2020-04-16 19:09:20,957  INFO [views-get_user_list_property] active list is New Cledonians
+2020-04-16 19:09:23,421  INFO [views-get_user_list_property] get multiple properties | user = SergeiSee
+2020-04-16 19:09:23,422  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:09:23,422  INFO [views-get_session_list_choice] session value = 8
+2020-04-16 19:09:23,426  INFO [views-get_user_list_property] active list is New Cledonians
+2020-04-16 19:09:28,623  INFO [views-get_user_list_property] get multiple properties | user = SergeiSee
+2020-04-16 19:09:28,624  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:09:28,624  INFO [views-get_session_list_choice] session value = 8
+2020-04-16 19:09:28,629  INFO [views-get_user_list_property] active list is New Cledonians
+2020-04-16 19:09:28,629  INFO [views-merchant_create] from submitted
+2020-04-16 19:09:28,670  INFO [views-merchant_list] user = SergeiSee
+2020-04-16 19:09:28,670  INFO [views-get_user_list_property] get multiple properties | user = SergeiSee
+2020-04-16 19:09:28,671  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:09:28,671  INFO [views-get_session_list_choice] session value = 8
+2020-04-16 19:09:28,675  INFO [views-get_user_list_property] active list is New Cledonians
+2020-04-16 19:09:34,038  INFO [views-is_user_leader] user = SergeiSee
+2020-04-16 19:09:34,041  INFO [views-is_user_leader]  user is leader
+2020-04-16 19:09:34,046  INFO [views-merchant_delete] merchant deleted
+2020-04-16 19:09:34,061  INFO [views-merchant_list] user = SergeiSee
+2020-04-16 19:09:34,061  INFO [views-get_user_list_property] get multiple properties | user = SergeiSee
+2020-04-16 19:09:34,061  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:09:34,062  INFO [views-get_session_list_choice] session value = 8
+2020-04-16 19:09:34,068  INFO [views-get_user_list_property] active list is New Cledonians
+2020-04-16 19:09:42,584  INFO [views-invite] can select from <QuerySet [<ShopGroup: Muppets>, <ShopGroup: New Cledonians>]>
+2020-04-16 19:09:42,584  INFO [views-invite] Outside Post section
+2020-04-16 19:09:48,285  INFO [views-group_list] user = SergeiSee
+2020-04-16 19:09:50,579  INFO [views-shop_list] view entry | user = SergeiSee
+2020-04-16 19:09:50,582  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:09:50,582  INFO [views-get_session_list_choice] session value = 8
+2020-04-16 19:09:50,586  INFO [views-shop_list] active list is New Cledonians | user = SergeiSee
+2020-04-16 19:09:50,586  INFO [views-is_user_leader] user = SergeiSee
+2020-04-16 19:09:50,589  INFO [views-is_user_leader]  user is leader
+2020-04-16 19:09:53,260  INFO [views-invite] can select from <QuerySet [<ShopGroup: Muppets>, <ShopGroup: New Cledonians>]>
+2020-04-16 19:09:53,260  INFO [views-invite] Outside Post section
+2020-04-16 19:10:28,185  INFO [views-invite] can select from <QuerySet [<ShopGroup: Muppets>, <ShopGroup: New Cledonians>]>
+2020-04-16 19:10:28,185  INFO [views-invite] Post section | user={request.user}
+2020-04-16 19:10:28,193  INFO [views-create_key] created key is be692c6292550dfeecb9341d54f014f52d955afc
+2020-04-16 19:10:28,194  INFO [views-invite] going to save invitation key
+2020-04-16 19:10:28,234  INFO [views-invite] there is a send_result
+2020-04-16 19:10:28,250  INFO [views-complete] Invite Complete|parameter = <p>The person you invited is already a member on the site<br>Next time they log on, they will be able to join the group</p> 
+2020-04-16 19:10:38,755  INFO [views-logout_view] logging out SergeiSee
+2020-04-16 19:10:40,425  INFO [views-login_email] entry to view
+2020-04-16 19:10:56,943  INFO [views-login_email] entry to view
+2020-04-16 19:10:56,943  INFO [forms-clean] Attempt to login asharpsystems@gmail.com
+2020-04-16 19:10:57,043  INFO [forms-clean] known user
+2020-04-16 19:10:57,043  INFO [views-login_email] form submitted
+2020-04-16 19:10:57,144  INFO [views-login_email] new user authenticated
+2020-04-16 19:10:57,146  INFO [views-login_email] divert to invite selection
+2020-04-16 19:11:06,828  INFO [views-invite_select_view] to accept item 7
+2020-04-16 19:11:06,886  INFO [views-user_group_select] user = JackSkinner
+2020-04-16 19:11:06,886  INFO [views-user_group_select] get the lists the user is member of
+2020-04-16 19:11:06,890  INFO [views-user_group_select] list of groups <QuerySet [<ShopGroup: Muppets>, <ShopGroup: Skinnys>]>
+2020-04-16 19:11:09,391  INFO [views-user_group_select] user = JackSkinner
+2020-04-16 19:11:09,391  INFO [views-user_group_select] get the lists the user is member of
+2020-04-16 19:11:09,394  INFO [views-user_group_select] list of groups <QuerySet [<ShopGroup: Muppets>, <ShopGroup: Skinnys>]>
+2020-04-16 19:11:09,394  INFO [views-user_group_select] selected list is 4
+2020-04-16 19:11:09,415  INFO [views-shop_list] view entry | user = JackSkinner
+2020-04-16 19:11:09,417  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:11:09,417  INFO [views-get_session_list_choice] session value = 4
+2020-04-16 19:11:09,421  INFO [views-shop_list] active list is Muppets | user = JackSkinner
+2020-04-16 19:11:09,421  INFO [views-is_user_leader] user = JackSkinner
+2020-04-16 19:11:09,426  INFO [views-is_user_leader]  user is not leader
+2020-04-16 19:11:17,960  INFO [views-shop_create] view entered | user = JackSkinner
+2020-04-16 19:11:17,960  INFO [views-get_user_list_property] get multiple properties | user = JackSkinner
+2020-04-16 19:11:17,961  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:11:17,961  INFO [views-get_session_list_choice] session value = 4
+2020-04-16 19:11:17,965  INFO [views-get_user_list_property] active list is Muppets
+2020-04-16 19:11:27,449  INFO [views-shop_create] view entered | user = JackSkinner
+2020-04-16 19:11:27,449  INFO [views-get_user_list_property] get multiple properties | user = JackSkinner
+2020-04-16 19:11:27,450  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:11:27,450  INFO [views-get_session_list_choice] session value = 4
+2020-04-16 19:11:27,455  INFO [views-get_user_list_property] active list is Muppets
+2020-04-16 19:11:27,456  INFO [views-shop_create] form valid | user = JackSkinner
+2020-04-16 19:11:27,460  INFO [views-shop_create] item will be added | user = JackSkinner
+2020-04-16 19:11:27,461  INFO [views-shop_create] item saving for vendor = None
+2020-04-16 19:11:29,675  INFO [views-shop_list] view entry | user = JackSkinner
+2020-04-16 19:11:29,677  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:11:29,677  INFO [views-get_session_list_choice] session value = 4
+2020-04-16 19:11:29,681  INFO [views-shop_list] active list is Muppets | user = JackSkinner
+2020-04-16 19:11:29,682  INFO [views-is_user_leader] user = JackSkinner
+2020-04-16 19:11:29,684  INFO [views-is_user_leader]  user is not leader
+2020-04-16 19:13:53,621  INFO [views-shop_list] view entry | user = JackSkinner
+2020-04-16 19:13:53,623  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:13:53,624  INFO [views-get_session_list_choice] session value = 4
+2020-04-16 19:13:53,629  INFO [views-shop_list] active list is Muppets | user = JackSkinner
+2020-04-16 19:13:53,629  INFO [views-is_user_leader] user = JackSkinner
+2020-04-16 19:13:53,631  INFO [views-is_user_leader]  user is not leader
+2020-04-16 19:13:55,851  INFO [views-invite] can select from <QuerySet [<ShopGroup: Skinnys>]>
+2020-04-16 19:13:55,851  INFO [views-invite] Outside Post section
+2020-04-16 19:14:15,926  INFO [views-invite] can select from <QuerySet [<ShopGroup: Skinnys>]>
+2020-04-16 19:14:15,926  INFO [views-invite] Post section | user={request.user}
+2020-04-16 19:14:15,929  INFO [views-create_key] created key is c40a2b9023194b0080f0f26f4a4f668451d8d423
+2020-04-16 19:14:15,929  INFO [views-invite] going to save invitation key
+2020-04-16 19:14:18,780  INFO [views-invite] email sent
+2020-04-16 19:14:18,794  INFO [views-complete] Invite Complete|parameter = None 
+2020-04-16 19:14:24,748  INFO [views-shop_list] view entry | user = JackSkinner
+2020-04-16 19:14:24,752  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:14:24,752  INFO [views-get_session_list_choice] session value = 4
+2020-04-16 19:14:24,757  INFO [views-shop_list] active list is Muppets | user = JackSkinner
+2020-04-16 19:14:24,757  INFO [views-is_user_leader] user = JackSkinner
+2020-04-16 19:14:24,759  INFO [views-is_user_leader]  user is not leader
+2020-04-16 19:14:27,359  INFO [views-logout_view] logging out JackSkinner
+2020-04-16 19:14:40,713  INFO [views-invited] testing of the key to start
+2020-04-16 19:14:40,721  INFO [views-invited] key is ready
+2020-04-16 19:15:05,201  INFO [views-invited] testing of the key to start
+2020-04-16 19:15:05,207  INFO [views-invited] key is ready
+2020-04-16 19:15:05,208  INFO [views-invited] form validated
+2020-04-16 19:15:05,208  INFO [views-create_username] no username yet
+2020-04-16 19:15:05,209  INFO [views-invited] create the new user SamSamuel
+2020-04-16 19:15:05,339  INFO [views-invited] Authenticate and log in SamSamuel
+2020-04-16 19:15:05,437  INFO [views-invited] Update key use
+2020-04-16 19:15:05,439  INFO [views-invited] Add user to group 9
+2020-04-16 19:15:05,461  INFO [views-set_group] default list 9
+2020-04-16 19:15:33,296  INFO [views-shop_list] view entry | user = SamSamuel
+2020-04-16 19:15:33,299  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:15:33,299  INFO [views-get_session_list_choice] session value = 9
+2020-04-16 19:15:33,305  INFO [views-shop_list] active list is Skinnys | user = SamSamuel
+2020-04-16 19:15:33,306  INFO [views-is_user_leader] user = SamSamuel
+2020-04-16 19:15:33,308  INFO [views-is_user_leader]  user is not leader
+2020-04-16 19:15:36,738  INFO [views-shop_create] view entered | user = SamSamuel
+2020-04-16 19:15:36,738  INFO [views-get_user_list_property] get multiple properties | user = SamSamuel
+2020-04-16 19:15:36,739  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:15:36,739  INFO [views-get_session_list_choice] session value = 9
+2020-04-16 19:15:36,744  INFO [views-get_user_list_property] active list is Skinnys
+2020-04-16 19:15:42,714  INFO [views-shop_create] view entered | user = SamSamuel
+2020-04-16 19:15:42,714  INFO [views-get_user_list_property] get multiple properties | user = SamSamuel
+2020-04-16 19:15:42,714  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:15:42,714  INFO [views-get_session_list_choice] session value = 9
+2020-04-16 19:15:42,718  INFO [views-get_user_list_property] active list is Skinnys
+2020-04-16 19:15:42,719  INFO [views-shop_create] form valid | user = SamSamuel
+2020-04-16 19:15:42,724  INFO [views-shop_create] item will be added | user = SamSamuel
+2020-04-16 19:15:42,724  INFO [views-shop_create] item saving for vendor = None
+2020-04-16 19:15:45,010  INFO [views-shop_list] view entry | user = SamSamuel
+2020-04-16 19:15:45,013  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:15:45,013  INFO [views-get_session_list_choice] session value = 9
+2020-04-16 19:15:45,018  INFO [views-shop_list] active list is Skinnys | user = SamSamuel
+2020-04-16 19:15:45,018  INFO [views-is_user_leader] user = SamSamuel
+2020-04-16 19:15:45,020  INFO [views-is_user_leader]  user is not leader
+2020-04-16 19:16:02,478  INFO [views-group_list] user = SamSamuel
+2020-04-16 19:16:21,581  INFO [views-logout_view] logging out SamSamuel
+2020-04-16 19:16:23,259  INFO [views-login_email] entry to view
+2020-04-16 19:16:36,989  INFO [views-login_email] entry to view
+2020-04-16 19:16:36,990  INFO [forms-clean] Attempt to login sergei@hotmail.com
+2020-04-16 19:16:37,086  INFO [forms-clean] known user
+2020-04-16 19:16:37,086  INFO [views-login_email] form submitted
+2020-04-16 19:16:37,185  INFO [views-login_email] new user authenticated
+2020-04-16 19:16:37,187  INFO [views-login_email] divert to set group
+2020-04-16 19:16:37,210  INFO [views-set_group] user SergeiSee is member to >1 group
+2020-04-16 19:16:37,253  INFO [views-user_group_select] user = SergeiSee
+2020-04-16 19:16:37,253  INFO [views-user_group_select] get the lists the user is member of
+2020-04-16 19:16:37,257  INFO [views-user_group_select] list of groups <QuerySet [<ShopGroup: Muppets>, <ShopGroup: New Cledonians>, <ShopGroup: Climbers>]>
+2020-04-16 19:16:40,061  INFO [views-user_group_select] user = SergeiSee
+2020-04-16 19:16:40,061  INFO [views-user_group_select] get the lists the user is member of
+2020-04-16 19:16:40,064  INFO [views-user_group_select] list of groups <QuerySet [<ShopGroup: Muppets>, <ShopGroup: New Cledonians>, <ShopGroup: Climbers>]>
+2020-04-16 19:16:40,064  INFO [views-user_group_select] selected list is 4
+2020-04-16 19:16:40,082  INFO [views-shop_list] view entry | user = SergeiSee
+2020-04-16 19:16:40,084  INFO [views-get_session_list_choice] get session choice
+2020-04-16 19:16:40,084  INFO [views-get_session_list_choice] session value = 4
+2020-04-16 19:16:40,088  INFO [views-shop_list] active list is Muppets | user = SergeiSee
+2020-04-16 19:16:40,088  INFO [views-is_user_leader] user = SergeiSee
+2020-04-16 19:16:40,091  INFO [views-is_user_leader]  user is leader
+2020-04-16 19:17:49,622  INFO [views-invite] can select from <QuerySet [<ShopGroup: Muppets>, <ShopGroup: New Cledonians>]>
+2020-04-16 19:17:49,622  INFO [views-invite] Outside Post section
+2020-04-16 19:18:09,821  INFO [views-logout_view] logging out SergeiSee
+2020-04-16 19:18:12,061  INFO [views-login_email] entry to view
+2020-04-16 19:18:31,617  INFO [views-login_email] entry to view
+2020-04-16 19:18:31,617  INFO [forms-clean] Attempt to login asharpsystems@gmail.com
+2020-04-16 19:18:31,718  INFO [forms-clean] known user
+2020-04-16 19:18:31,718  INFO [views-login_email] form submitted
+2020-04-16 19:18:31,816  INFO [views-login_email] new user authenticated
+2020-04-16 19:18:31,818  INFO [views-login_email] divert to set group
+2020-04-16 19:18:31,838  INFO [views-set_group] default list 9
+2020-04-16 19:18:35,221  INFO [views-logout_view] logging out SamSamuel
+2020-04-16 19:18:36,394  INFO [views-login_email] entry to view
+2020-04-16 19:18:55,357  INFO [views-login_email] entry to view
+2020-04-16 19:18:55,357  INFO [forms-clean] Attempt to login asharpsystems@gmail.com
+2020-04-16 19:18:55,457  INFO [forms-clean] password fault
+2020-04-16 19:19:04,999  INFO [views-login_email] entry to view
+2020-04-16 19:19:04,999  INFO [forms-clean] Attempt to login asharpsystems@gmail.com
+2020-04-16 19:19:05,099  INFO [forms-clean] password fault
+2020-04-16 19:19:20,780  INFO [views-password_validation] existing user url decode start
+2020-04-16 19:19:20,787  INFO [views-password_validation] update user and group
+2020-04-16 19:19:40,165  INFO [views-password_validation] existing user url decode start
+2020-04-16 19:19:40,173  INFO [views-password_validation] update user and group
+2020-04-16 19:19:49,424  INFO [views-password_validation] existing user url decode start
+2020-04-16 19:19:49,432  INFO [views-password_validation] update user and group
+2020-04-16 19:19:49,541  INFO [views-password_validation] user logged in
+2020-04-16 19:19:49,560  INFO [views-set_group] default list 9
+2020-04-16 19:19:55,919  INFO [views-logout_view] logging out SamSamuel
