@@ -5,8 +5,9 @@ from .views import *
 app_name = 'the_list'
 
 urlpatterns = [
-    path('list/', recipe_list, name='recipe_list'),
+    # path('list/', recipe_list, name='recipe_list'),
     path('filter/', recipe_filter, name='recipe_filter'),
+    re_path('recipe/(?P<pk>\d+)', recipe_detail, name='recipe_detail'),
     # path('create/', shop_create, name='shop_create'),
     # #url(r'bogger/$', shop_create, name='shop_bogger'),
     # #url(r'groups/(?P<pk>\d+)$', group_detail, name='group_update'),
@@ -22,8 +23,12 @@ urlpatterns = [
     # path('group_select/', user_group_select, name='group_select'),
     path('books/', book_list, name='book_list'),
     path('book/create/', book_create, name='book_create'),
+    re_path('foodgroup/(?P<pk>\d+)', foodgroup_detail, name='foodgroup_detail'),
+    path('foodgroup_list/', foodgroup_list, name='foodgroup_list'),
+    path('home/',home,name='home'),
     re_path('ingredient/(?P<pk>\d+)', ingredient_detail, name='ingredient_detail'),
     path('ingredient_list/', ingredient_list, name='ingredient_list'),
+    path('ingredient_lookup/', ingredient_lookup, name='ingredient_lookup'),
     path('load', recipe_load, name='recipe_load'),
     # re_path('merchants/(?P<pk>\d+)', merchant_update, name='merchant_update'),
     # re_path('merchants/delete/(?P<pk>\d+)', merchant_delete, name='merchant_delete'),

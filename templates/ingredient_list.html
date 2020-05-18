@@ -3,13 +3,14 @@
 {% block content %}
 {{ title }}
 <br>
-<a href="{% url 'recipe:ingredient_detail pk=' %}" class="top-menu">Add Ingredient </a><br><br>
+<a href="{% url ''|add:new_item_url pk=0 %}" class="top-menu">{{ add_text }} </a><br><br>
+
   <ul>
   {% for obj in object_list %}
     <div class="row p-1 mb-2 bg-light text-dark">
 
         <div class="col-md-8 col-xs-8">
-            <a href=" {{ obj.get_absolute_url }}">
+            <!--<a href=" {{ obj.get_absolute_url }}">-->
             {{ obj.name }}</a>
         </div>
         <div class="col-md-4 col-xs-4">

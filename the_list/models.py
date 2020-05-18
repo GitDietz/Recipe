@@ -41,7 +41,7 @@ class FoodGroupManager(models.Manager):
 
 class IngredientManager(models.Manager):
     def all(self):
-        qs = super(IngredientManager, self).all()
+        qs = super(IngredientManager, self).all().order_by(Lower('name'))
         return qs
 
 
@@ -123,10 +123,12 @@ class FoodGroup(models.Model):
     class Meta:
         ordering = ['name']
 
-
     def __str__(self):
         label = self.name.title()
         return str(label)
+
+    def get_absolute_url(self):
+        return reverse('recipe:foodgroup_detail', args=[str(self.id)])
 
 
 class Ingredient(models.Model):
@@ -165,7 +167,7 @@ class Recipe(models.Model):
         return str(label)
 
     def get_absolute_url(self):
-        return reverse("detail", kwargs={"id": self.id})
+        return reverse("recipe:recipe_detail", args=[str(self.id)])
 
 
 

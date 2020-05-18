@@ -38,6 +38,9 @@
                         <a class="nav-link" href="{% url 'the_list:recipe_filter' %}">Recipes</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'the_list:foodgroup_list' %}">Food Groups</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'the_list:ingredient_list' %}">Ingredients</a>
                     </li>
                     {% if not user.is_authenticated %}

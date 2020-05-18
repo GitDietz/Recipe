@@ -6,10 +6,8 @@
 {% block content %}
 <div class="col-sm-6 col-sm-offset-3">
 
-<h2>Item detail</h2>
+    <h2>Item detail</h2>
     <p>
-        Number {{ instance.id }} <br/>
-        Requested on: {{ instance.date_requested }}<br/>
     <form method='POST' action="" >
         {% csrf_token %}
         {{ form|crispy }} <br/>
@@ -17,6 +15,8 @@
     </form>
     </p>
     <hr/>
+
+
     {% if form.errors %}
      {% for field in form %}
         {% for error in field.errors %}
@@ -32,5 +32,63 @@
     {% endfor %}
     {% endif %}
 </div>
+{% include 'jquery.html' %}
+
+<script>
+$(function() {
+    $("#id_ingredient_add").on('keyup', function(){
+        var value = $(this).val();
+        console.log(value);
+        console.log("value sent");
+        $.ajax({
+            url: "{% url 'recipe:ingredient_lookup' %}",
+            data: {
+              'term': value
+            },
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                new_set = data.list;
+                //list = data;
+                //$("#id_ingredient_add").autocomplete("enable");
+                //$("#id_ingredient_add").autocomplete({
+                //    disabled: false,
+                //    source: new_set,
+                //    minLength: 3,
+
+                //    }
+                 var mySelect = $('#id_ingredient_add');
+                    $.each(new_set, function(text) {
+                        mySelect.append(
+                            $('<option></option>').html(text)
+                        );
+                    });
+                }
+
+        });
+    });
+});
+</script>
+
+<!--<script>
+
+  $(function() {
+    $("#id_ingredient_add").autocomplete({
+      console.log(value);
+      console.log("value sent");
+      source: "/recipe/ingredient_lookup/",
+      select: function (event, ui) { //item selected
+        AutoCompleteSelectHandler(event, ui)
+      },
+      minLength: 2,
+    });
+  });
+
+  function AutoCompleteSelectHandler(event, ui)
+  {
+    var selectedObj = ui.item;
+  }
+
+</script>-->
 {% endblock content%}
 

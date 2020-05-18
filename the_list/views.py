@@ -5,50 +5,19 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse
 from django.db import DatabaseError
 from django.db.models import Q
-from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, Http404, redirect
+from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, Http404, redirect, HttpResponse
 from urllib.parse import urlencode
 
-import csv, io
+import csv, io, json
 import logging
 
 from .filter import RecipeFilter
 from .forms import *
-from .models import Book, Recipe
+from .models import Book, Recipe, FoodGroup
 
 from lcore.utils import *
 
 from datetime import date
-
-
-# def get_session_list_choice(request):
-#     """
-#     get the list choice from session or set it using the first group this user is in
-#     handle the odd case when user is not in a group - should not happen outside DEV
-#     """
-#     try:
-#         logging.getLogger("info_logger").info("get session choice")
-#         list_active = request.session['list'] # the session can contain value that is no longer in DB
-#         if list_active != '':
-#             logging.getLogger("info_logger").info(f"session value = {list_active}")
-#             if ShopGroup.objects.filter(id=list_active).exists():
-#                 return list_active
-#             else:
-#                 logging.getLogger("info_logger").info('No such value in DB, new selection required')
-#                 request.session.pop('list')
-#                 return None
-#         else:
-#             logging.getLogger("info_logger").info(f"session NO value = {list_active}")
-#             return None
-#     except KeyError:
-#         logging.getLogger("info_logger").info(f'no list in session, getting first option from DB')
-#         list_choices = ShopGroup.objects.filter(members=request.user)
-#         if list_choices:
-#             select_item = list_choices.first().id
-#             request.session['list'] = select_item
-#             return select_item
-#         else:
-#             return None
-
 
 #  #################################  Recipe #################################
 # @login_required
@@ -103,17 +72,85 @@ from datetime import date
 #     return render(request, 'item_create.html', context)
 
 
-def ingredient_detail(request, pk=None):
-    object = get_object_or_404(Ingredient, pk=pk)
+def foodgroup_detail(request, pk=None):
+    # if pk = 0 then it is to create a new item - modify the flow for that
+
+    if pk == '0':
+        object = None
+    else:
+        object = get_object_or_404(FoodGroup, pk=pk)
 
     if request.method == "POST":
+        form = FoodGroupForm(request.POST, instance=object)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('recipe:foodgroup_list'))
 
+    template_name = 'item_detail.html'
+    context = {
+        'title': 'Update Item',
+        'form': FoodGroupForm(instance=object),
+        'notice': '',
+    }
+    return render(request, template_name, context)
+
+
+def foodgroup_list(request):
+    """
+    Will show the food group list
+    """
+    fg_qs = FoodGroup.objects.all()
+    template = 'ingredient_list.html'
+    title = 'List of Food Groups'
+    addition_text = 'Add Foodgroup'
+    add_url = 'recipe:foodgroup_detail'
+    context = {
+        'title': title,
+        'object_list': fg_qs,
+        'add_text': addition_text,
+        'new_item_url': add_url,
+    }
+    return render(request,template,context)
+
+
+def ingredient_detail(request, pk=None):
+    # if pk = 0 then it is to create a new item - modify the flow for that
+    # now working this as  html only form not rendered
+    if pk == '0':
+        object = None
+    else:
+        object = get_object_or_404(Ingredient, pk=pk)
+
+    if request.method == "POST":
         form = IngredientForm(request.POST, instance=object)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('recipe:ingredient_list'))
 
-    template_name = 'ingredient_detail.html'
+    template_name = 'item_detail.html'
+    context = {
+        'title': 'Update Item',
+        'form': IngredientForm(instance=object),
+        'notice': '',
+    }
+    return render(request, template_name, context)
+
+
+def ingredient_detail_original(request, pk=None):
+    # if pk = 0 then it is to create a new item - modify the flow for that
+
+    if pk == '0':
+        object = None
+    else:
+        object = get_object_or_404(Ingredient, pk=pk)
+
+    if request.method == "POST":
+        form = IngredientForm(request.POST, instance=object)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('recipe:ingredient_list'))
+
+    template_name = 'item_detail.html'
     context = {
         'title': 'Update Item',
         'form': IngredientForm(instance=object),
@@ -129,12 +166,57 @@ def ingredient_list(request):
     ingredient_qs = Ingredient.objects.all()
     template = 'ingredient_list.html'
     title = 'List of Ingredients'
+    addition_text = 'Add Ingredient'
+    add_url = 'recipe:ingredient_detail'
     context = {
         'title': title,
         'object_list': ingredient_qs,
+        'add_text': addition_text,
+        'new_item_url': add_url,
     }
-    return render(request,template,context)
+    return render(request, template, context)
 
+
+def ingredient_lookup(request):
+    #  http://127.0.0.1:8000/recipe/ingredient_lookup/?term=ch
+    if request.is_ajax:
+        q = request.GET.get('term', None)
+        print(f'the ajax call ingredient = {q}')
+        ingredients = Ingredient.objects.filter(name__icontains=q)
+        results = []
+        for ind in ingredients:
+            ind_json = {}
+            ind_json = ind.name
+            results.append(ind_json)
+        data = json.dumps(results)
+    else:
+        data = 'fail'
+
+    print(data)
+    mimetype = 'application/json'
+    return HttpResponse(data, mimetype)
+
+
+def recipe_detail(request, pk=None):
+    # if pk = 0 then it is to create a new item - modify the flow for that
+    if pk == '0':
+        obj = None
+    else:
+        obj = get_object_or_404(Recipe, pk=pk)
+
+    if request.method == "POST":
+        form = RecipeForm(request.POST, instance=obj)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('recipe:recipe_filter'))
+
+    template_name = 'item_detail.html'
+    context = {
+        'title': 'Update Item',
+        'form': RecipeForm(instance=obj),
+        'notice': '',
+    }
+    return render(request, template_name, context)
 
 
 # @login_required
@@ -408,3 +490,13 @@ def recipe_load(request):
 
     context = {}
     return render(request, template, context)
+
+
+def home(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            pass  # does nothing, just trigger the validation
+    else:
+        form = ContactForm()
+    return render(request, 'experiment.html', {'form': form})
