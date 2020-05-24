@@ -40,7 +40,20 @@ $(function() {
         var value = $(this).val();
         console.log(value);
         console.log("value sent");
-        $.ajax({
+
+
+      $.ajax({                       // initialize an AJAX request
+        url: "{% url 'recipe:ingredient_dropdown' %}",
+        data: {
+          'term': value
+        },
+        success: function (data) {
+          console.log(data);
+          $("#id_ingredient_add").html(data);
+        }
+      });
+
+     /*   $.ajax({
             url: "{% url 'recipe:ingredient_lookup' %}",
             data: {
               'term': value
@@ -65,7 +78,7 @@ $(function() {
                     });
                 }
 
-        });
+        });*/
     });
 });
 </script>

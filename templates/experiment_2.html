@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+{# example files of how to manipulate the html for django  #}
+
+<form method="post" novalidate>
+  <table border="1">
+  {% csrf_token %}
+  {{ form }}
+  </table>
+</form>
+
+
+{% endblock content%}
+
+
+
+
+

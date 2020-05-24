@@ -1,11 +1,14 @@
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
+from django.core import serializers
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.urls import reverse
+
 from django.db import DatabaseError
 from django.db.models import Q
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, Http404, redirect, HttpResponse
+from django.urls import reverse
 from urllib.parse import urlencode
 
 import csv, io, json
@@ -113,6 +116,50 @@ def foodgroup_list(request):
     return render(request,template,context)
 
 
+def indexView(request):
+    # url = friend/'
+    form = FriendForm()
+    friends = Friend.objects.all()
+    return render(request, "index.html", {"form": form, "friends": friends})
+
+
+def checkNickName(request):
+    # request should be ajax and method should be GET.
+    if request.is_ajax and request.method == "GET":
+        # get the nick name from the client side.
+        nick_name = request.GET.get("nick_name", None)
+        # check for the nick name in the database.
+        if Friend.objects.filter(nick_name = nick_name).exists():
+            # if nick_name found return not valid new friend
+            return JsonResponse({"valid":False}, status = 200)
+        else:
+            # if nick_name not found, then user can create a new friend.
+            return JsonResponse({"valid":True}, status = 200)
+
+    return JsonResponse({}, status = 400)
+
+
+def postFriend(request):
+    # url = friend/ajax/ '
+    # request should be ajax and method should be POST.
+    if request.is_ajax and request.method == "POST":
+        # get the form data
+        form = FriendForm(request.POST)
+        # save the data and after fetch the object in instance
+        if form.is_valid():
+            instance = form.save()
+            # serialize in new friend object in json
+            ser_instance = serializers.serialize('json', [ instance, ])
+            # send to client side.
+            return JsonResponse({"instance": ser_instance}, status=200)
+        else:
+            # some form errors occured.
+            return JsonResponse({"error": form.errors}, status=400)
+
+    # some error occured
+    return JsonResponse({"error": ""}, status=400)
+
+
 def ingredient_detail(request, pk=None):
     # if pk = 0 then it is to create a new item - modify the flow for that
     # now working this as  html only form not rendered
@@ -138,7 +185,6 @@ def ingredient_detail(request, pk=None):
 
 def ingredient_detail_original(request, pk=None):
     # if pk = 0 then it is to create a new item - modify the flow for that
-
     if pk == '0':
         object = None
     else:
@@ -159,20 +205,37 @@ def ingredient_detail_original(request, pk=None):
     return render(request, template_name, context)
 
 
+def ingedient_delete(request, pk):
+    obj = get_object_or_404(Ingredient, pk=pk)
+    if obj:
+        obj.delete()
+    return HttpResponseRedirect(reverse('recipe:ingredient_list'))
+
+
+def ingredient_dropdown(request):
+    q = request.GET.get('term', None)
+    print(f'the ajax call ingredient in ingredient_dropdown = {q}')
+    ingredients = list(Ingredient.objects.filter(name__icontains=q))
+    return render(request, 'ingredient_dropdown.html', {'ingredients': ingredients})
+
+
 def ingredient_list(request):
     """
     Will show the ingredients list
     """
+    #ingredient_qs = Ingredient.objects.all().filter(belong_to__isnull=True)
     ingredient_qs = Ingredient.objects.all()
     template = 'ingredient_list.html'
     title = 'List of Ingredients'
     addition_text = 'Add Ingredient'
     add_url = 'recipe:ingredient_detail'
+    list_for = 'ingredient'
     context = {
         'title': title,
         'object_list': ingredient_qs,
         'add_text': addition_text,
         'new_item_url': add_url,
+        'list_for': list_for,
     }
     return render(request, template, context)
 
@@ -492,6 +555,25 @@ def recipe_load(request):
     return render(request, template, context)
 
 
+def load_ingredients(request):
+    recipes = Recipe.objects.all()
+    ingrs = list(Ingredient.objects.all().values_list('name', flat=True))
+    for recipe in recipes:
+        if recipe.description != "":
+            if '/' in recipe.description:
+                x = recipe.description.split('/')
+            else:
+                x = recipe.description.split()
+            print(x)
+            if x:
+                for item in x:
+                    if item.strip() not in ingrs and item != 'and':
+                        ingrs.append(item)
+                        _, created = Ingredient.objects.get_or_create(name=item.strip())
+
+    return render(request, 'done.html',{})
+
+
 def home(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
@@ -500,3 +582,13 @@ def home(request):
     else:
         form = ContactForm()
     return render(request, 'experiment.html', {'form': form})
+
+
+def home_colors(request):
+    if request.method == 'POST':
+        form = ColorfulContactForm(request.POST)
+        if form.is_valid():
+            pass  # does nothing, just trigger the validation
+    else:
+        form = ContactForm()
+    return render(request, 'experiment_2.html', {'form': form})

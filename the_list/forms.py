@@ -1,10 +1,11 @@
+import datetime
 from dal import autocomplete
 from django import forms
 from django.core.exceptions import ValidationError
 from django.db.models import Q
 
 from django.utils.safestring import mark_safe
-from .models import Book, FoodGroup, Ingredient, Recipe
+from .models import Book, FoodGroup, Ingredient, Recipe, Friend
 
 
 # class SelectDropdownWidget(forms.Select):
@@ -80,8 +81,15 @@ class IngredientForm(forms.ModelForm):
 
 
 class RecipeForm(forms.ModelForm):
-    ingredient_add = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'class': 'ui-front', 'autocomplete': 'on'}))
+    # ingredient_add = forms.ModelChoiceField(# widget=forms.TextInput(attrs={'class': 'ui-front', 'autocomplete': 'on'}),
+    #     queryset=Ingredient.objects.none())
+        # widget.attrs.update({'class': 'form-control'}),
     #div is id= id_ingredient_add
+    ingredient_add = forms.CharField(max_length=50)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # self.fields['ingredient_add'].queryset = Ingredient.objects.none()
 
     class Meta:
         model = Recipe
@@ -108,3 +116,46 @@ class ContactForm(forms.Form):
         message = cleaned_data.get('message')
         if not name and not email and not message:
             raise forms.ValidationError('You have to write something!')
+
+
+class ColorfulContactForm(forms.Form):
+    name = forms.CharField(
+        max_length=30,
+        widget=forms.TextInput(
+            attrs={
+                'style': 'border-color: blue;',
+                'placeholder': 'Write your name here'
+            }
+        )
+    )
+    email = forms.EmailField(
+        max_length=254,
+        widget=forms.EmailInput(attrs={'style': 'border-color: green;'})
+    )
+    message = forms.CharField(
+        max_length=2000,
+        widget=forms.Textarea(attrs={'style': 'border-color: orange;'}),
+        help_text='Write here your message!'
+    )
+
+
+class FriendForm(forms.ModelForm):
+    # # change the widget of the date field.
+    dob = forms.DateField(
+        label='What is their birth date?',
+        # change the range of the years from 1980 to currentYear - 5
+        widget=forms.SelectDateWidget(years=range(1960, datetime.date.today().year - 5))
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(FriendForm, self).__init__(*args, **kwargs)
+        ## add a "form-control" class to each form input
+        ## for enabling bootstrap
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+            })
+
+    class Meta:
+        model = Friend
+        fields = ("__all__")

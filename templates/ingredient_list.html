@@ -5,19 +5,35 @@
 <br>
 <a href="{% url ''|add:new_item_url pk=0 %}" class="top-menu">{{ add_text }} </a><br><br>
 
-  <ul>
-  {% for obj in object_list %}
-    <div class="row p-1 mb-2 bg-light text-dark">
+<ul>
+{% for obj in object_list %}
+<div class="row p-1 mb-2 bg-light text-dark">
 
-        <div class="col-md-8 col-xs-8">
-            <!--<a href=" {{ obj.get_absolute_url }}">-->
-            {{ obj.name }}</a>
-        </div>
-        <div class="col-md-4 col-xs-4">
+    <div class="col-md-8 col-xs-8">
+        <a href=" {{ obj.get_absolute_url }}">
+        {{ obj.name }}</a>
+        {% if list_for == 'ingredient' %}
+        -- > {{ obj.belong_to }}
+        <a onclick="return confirm_action('Are you sure you want to delete this item?')"
+             href="{% url 'recipe:ingedient_delete' pk=obj.id %}"><i class="far fa-sign-out-alt"></i></a>
 
-        </div>
+        {% endif %}
     </div>
-  {% endfor %}
-  </ul>
+    <div class="col-md-4 col-xs-4">
 
+    </div>
+</div>
+{% endfor %}
+</ul>
+<script type="text/javascript">
+
+function confirm_action(in_message) {
+  var res = confirm(in_message);
+    if (res) {
+        return true;
+    } else {
+        return false;
+    }
+}
+</script>
 {% endblock content %}
