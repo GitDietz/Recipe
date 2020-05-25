@@ -85,7 +85,7 @@ class RecipeForm(forms.ModelForm):
     #     queryset=Ingredient.objects.none())
         # widget.attrs.update({'class': 'form-control'}),
     #div is id= id_ingredient_add
-    ingredient_add = forms.CharField(max_length=50)
+    # ingredient_add = forms.CharField(max_length=50)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

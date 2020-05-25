@@ -45,7 +45,7 @@ admin.site.register(FoodGroup, FoodGroupAdmin)
 
 
 class RecipeModelAdmin(admin.ModelAdmin):
-    list_display = ['name', 'description', 'main_ingredient', 'category', 'in_book']
+    list_display = ['name', 'description', 'main_ingredients', 'category', 'in_book']
     search_fields = ['name']
     # list_filter = [RecipeFilter]
 

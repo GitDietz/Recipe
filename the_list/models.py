@@ -161,7 +161,7 @@ class Ingredient(models.Model):
 class Recipe(models.Model):
     name = models.CharField(max_length=150, unique=False, blank=False)
     description = models.CharField(max_length=100, blank=True)
-    main_ingredient = models.CharField(max_length=50, unique=False, blank=True)
+    main_ingredients = models.CharField(max_length=200, unique=False, blank=True)
     category = models.CharField(max_length=50, blank=True)
     #quantity = models.CharField(max_length=30, blank=True, null=True, default='1')
     in_book = models.ForeignKey(Book, blank=True, null=True, on_delete=models.CASCADE)

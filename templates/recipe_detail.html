@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block head_title %}
+    {{ block.super }} | Edit Item
+{% endblock head_title%}
+{% block content %}
+<div class="col-sm-6 col-sm-offset-3">
+
+    <h2>Item detail</h2>
+    <p>
+    <form method='POST' action="" >
+        {% csrf_token %}
+
+    {{ form.non_field_errors }}
+
+  {% for hidden_field in form.hidden_fields %}
+    {{ hidden_field.errors }}
+    {{ hidden_field|as_crispy_field }}
+  {% endfor %}
+
+  <table>
+    {% for field in form.visible_fields %}
+    <tr>
+        <td>
+        {% if field.name == 'main_ingredients'%}
+
+            <input type='text' id="ingr" class = "ui-widget form-control">
+            <button type="button" id="add_button"  >Add Main Ingredients</button>
+            <button type="button" id="add_ingr"  >Add DB Ingr</button>
+        {% endif %}
+
+        {{ field.errors }}
+        {{ field|as_crispy_field }}
+        {{ field.help_text }}
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+
+<!--
+     <div class="ui-widget">
+    <label for="places">Ingrediens: </label>
+    <input id="places">
+    </div> -->
+        <input type='submit' class="btn btn-secondary" value = 'Submit'>
+    </form>
+    <hr/>
+
+
+    {% if form.errors %}
+     {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+    {% endif %}
+</div>
+{% include 'jquery.html' %}
+
+<script>
+$(document).ready(function() {
+    $(function() {
+        $("#ingr").autocomplete({
+          source: '/recipe/ingredient_lookup/',
+          /*select: function (event, ui) { //item selected
+            AutoCompleteSelectHandler(event, ui)
+          },
+          minLength: 2,*/
+        });
+      });
+
+      function AutoCompleteSelectHandler(event, ui)
+      {
+        var selectedObj = ui.item;
+    }
+
+$( "#add_button" ).click(function() {
+  //alert( "Handler for .click() called." );
+  var add_val = titleCase(document.getElementById("ingr").value);
+  var main_val = document.getElementById("id_main_ingredients").value;
+  //console.log("The value is " + add_val);
+  //console.log("The existing value is " + main_val);
+  if (main_val == ""){
+            main_val = add_val;
+    }else{
+        main_val = main_val + ", " + add_val;
+        //console.log("New main value - " + main_val);
+    }
+  document.getElementById("id_main_ingredients").value = main_val;
+  $("#ingr").val("");
+  $("#ingr").focus("");
+});
+
+function titleCase(str) {
+  return str.toLowerCase().split(' ').map(function(word) {
+    return (word.charAt(0).toUpperCase() + word.slice(1));
+  }).join(' ');
+}
+
+$("#add_ingr").click(function (e) {
+        e.preventDefault();
+        var add_val = titleCase(document.getElementById("ingr").value);
+        // GET AJAX request
+        $.ajax({
+            type: 'GET',
+            url: "{% url 'recipe:ingredient_add_ajax' %}",
+            data: {"item": add_val},
+            success: function (response) {
+
+                if(!response["valid"]){
+                    alert("You cannot that item");
+                    $("#ingr").focus();
+                }
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        })
+    })
+
+});
+
+
+
+
+</script>
+
+
+{% endblock content%}
+

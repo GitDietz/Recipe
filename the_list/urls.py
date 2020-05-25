@@ -31,6 +31,7 @@ urlpatterns = [
     path('home/', home, name='home'),
     path('home_colors/', home_colors, name='home_colors'),
     re_path('ingredient/(?P<pk>\d+)', ingredient_detail, name='ingredient_detail'),
+    path('ingredient_add_ajax/', ingredient_add_ajax, name='ingredient_add_ajax'),
     re_path('ingedient_delete/(?P<pk>\d+)', ingedient_delete, name='ingedient_delete'),
     path('ingredient_dropdown', ingredient_dropdown, name='ingredient_dropdown'),
     path('ingredient_list/', ingredient_list, name='ingredient_list'),

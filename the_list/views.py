@@ -23,56 +23,6 @@ from lcore.utils import *
 from datetime import date
 
 #  #################################  Recipe #################################
-# @login_required
-# def shop_create(request):
-#     """
-#     responds to the item create template
-#     if 'add multiple items' is selected on the submit button the same submission form will return
-#     else the list view will be returned
-#     """
-#     logging.getLogger("info_logger").info(f"view entered | user = {request.user.username}")
-#     list_choices, user_list_options, list_active_no, active_list_name = get_user_list_property(request)
-#     form = ItemForm(request.POST or None, list=list_active_no)
-#     title = 'Add purchase items'
-#     notice = ''
-#     if form.is_valid():
-#         logging.getLogger("info_logger").info(f"form valid | user = {request.user.username}")
-#
-#         # get the objects still to purchase and check if this new one is among them
-#         qs_tobuy = Item.objects.to_get()
-#         item = form.save(commit=False)
-#         this_found = qs_tobuy.filter(Q(description__iexact=item.description))
-#         for_group = ShopGroup.objects.filter(id=list_active_no).first()
-#         if this_found:
-#             logging.getLogger("info_logger").info(f"item exists | user = {request.user.username}")
-#             notice = 'Already listed : ' + item.description
-#         else:
-#             logging.getLogger("info_logger").info(f"item will be added | user = {request.user.username}")
-#             item.in_group = for_group
-#             item.description = item.description.title()
-#             item.requested = request.user
-#             # vendor_id=request.POST.get('vendor_select') #this returns the relevant ID i selected
-#             vendor_id = item.to_get_from
-#             # this_merchant = Merchant.objects.get(pk=vendor_id)
-#             logging.getLogger("info_logger").info(f"item saving for vendor = {vendor_id}")
-#             item.to_get_from = vendor_id  # this_merchant
-#             item.date_requested = date.today()
-#             item.save()
-#             notice = 'Added ' + item.description
-#
-#         if 'add_one' in request.POST:
-#             return redirect('shop:shop_list')
-#         else:
-#             form = ItemForm(None, list=list_active_no)
-#
-#     context = {
-#         'title': title,
-#         'form': form,
-#         'notice': notice,
-#         'selected_list': active_list_name,
-#         'no_of_lists': user_list_options,
-#     }
-#     return render(request, 'item_create.html', context)
 
 
 def foodgroup_detail(request, pk=None):
@@ -124,6 +74,7 @@ def indexView(request):
 
 
 def checkNickName(request):
+    """feature of the postfriend function, not part of recipe project per se"""
     # request should be ajax and method should be GET.
     if request.is_ajax and request.method == "GET":
         # get the nick name from the client side.
@@ -240,12 +191,34 @@ def ingredient_list(request):
     return render(request, template, context)
 
 
+def ingredient_add_ajax(request):
+    #  http://127.0.0.1:8000/recipe/ingredient_lookup/?term=ch
+    if request.is_ajax:
+        q = request.GET.get('item', None)
+        print(f'the ajax call ingredient = {q}')
+        ingredients = Ingredient.objects.filter(name__icontains=q).order_by('name')
+        if ingredients.count() == 0:
+            try:
+                _, created = Ingredient.objects.get_or_create(name=q.strip().title())
+                data = 'pass'
+            except:
+                data = 'fail'
+        else:
+            data = 'fail'
+    else:
+        data = 'fail'
+
+    print(data)
+    mimetype = 'application/json'
+    return HttpResponse(data, mimetype)
+
+
 def ingredient_lookup(request):
     #  http://127.0.0.1:8000/recipe/ingredient_lookup/?term=ch
     if request.is_ajax:
         q = request.GET.get('term', None)
         print(f'the ajax call ingredient = {q}')
-        ingredients = Ingredient.objects.filter(name__icontains=q)
+        ingredients = Ingredient.objects.filter(name__icontains=q).order_by('name')
         results = []
         for ind in ingredients:
             ind_json = {}
@@ -273,7 +246,7 @@ def recipe_detail(request, pk=None):
             form.save()
             return HttpResponseRedirect(reverse('recipe:recipe_filter'))
 
-    template_name = 'item_detail.html'
+    template_name = 'recipe_detail.html'
     context = {
         'title': 'Update Item',
         'form': RecipeForm(instance=obj),
@@ -289,7 +262,8 @@ def recipe_list(request):
     """
     notice = ''
     logging.getLogger("info_logger").info(f"user = {request.user.username}")
-    recipes = Recipe.objects.all().order_by('name')
+    #recipes = Recipe.objects.all().order_by('name')
+    recipes = Recipe.objects.all().filter(main_ingredients__isnull=True).order_by('name')
     # need to extract the part of the GET
     print(request.GET)
     # remove this to a function later
@@ -326,7 +300,7 @@ def recipe_filter(request):
     """
     notice = ''
     logging.getLogger("info_logger").info(f"user = {request.user.username}")
-    recipes = Recipe.objects.all().order_by('name')
+    recipes = Recipe.objects.all().filter(main_ingredients__exact='').order_by('in_book', 'page')
     print(request.GET)
     recipes_filtered = RecipeFilter(request.GET, queryset=recipes)
     # page = request.GET.get('page', 1)
@@ -556,6 +530,7 @@ def recipe_load(request):
 
 
 def load_ingredients(request):
+    """using the data from recipes to split values and add them to ingredients list"""
     recipes = Recipe.objects.all()
     ingrs = list(Ingredient.objects.all().values_list('name', flat=True))
     for recipe in recipes:
@@ -575,6 +550,7 @@ def load_ingredients(request):
 
 
 def home(request):
+    """for the experiment on the setup of all the form tags"""
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
