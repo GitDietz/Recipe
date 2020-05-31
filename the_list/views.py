@@ -258,12 +258,12 @@ def recipe_detail(request, pk=None):
 # @login_required
 def recipe_list(request):
     """
-    shows the list of items in the particular list
+    shows the list of items in the particular list, handles pagination as well
     """
     notice = ''
     logging.getLogger("info_logger").info(f"user = {request.user.username}")
-    #recipes = Recipe.objects.all().order_by('name')
-    recipes = Recipe.objects.all().filter(main_ingredients__isnull=True).order_by('name')
+    recipes = Recipe.objects.all().order_by('name')
+    #recipes = Recipe.objects.all().filter(main_ingredients__isnull=True).order_by('name')
     # need to extract the part of the GET
     print(request.GET)
     # remove this to a function later
@@ -300,7 +300,8 @@ def recipe_filter(request):
     """
     notice = ''
     logging.getLogger("info_logger").info(f"user = {request.user.username}")
-    recipes = Recipe.objects.all().filter(main_ingredients__exact='').order_by('in_book', 'page')
+    recipes = Recipe.objects.all().order_by('name')
+    # recipes = Recipe.objects.all().filter(main_ingredients__exact='').order_by('in_book', 'page')
     print(request.GET)
     recipes_filtered = RecipeFilter(request.GET, queryset=recipes)
     # page = request.GET.get('page', 1)

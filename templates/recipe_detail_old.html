@@ -4,9 +4,9 @@
     {{ block.super }} | Edit Item
 {% endblock head_title%}
 {% block content %}
-<div>
+<div class="col-sm-6 col-sm-offset-3">
 
-    <h2>Recipe detail</h2>
+    <h2>Item detail</h2>
     <form method='POST' action="" >
         {% csrf_token %}
         {{ form.non_field_errors }}
@@ -16,44 +16,23 @@
             {{ hidden_field|as_crispy_field }}
         {% endfor %}
 
-        <div class="form-row">
-            <div class="form-group col-md-4 mb-0">
-            {{ form.name|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-0">
-            {{ form.description|as_crispy_field }}
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-3 mb-0">
-                <input type='text' id="ingr" class = "ui-widget form-control" placeholder="Find ingredients"></div>
-            <div class="form-group col-md-2 mb-0">
-                <button type="button" id="add_button"  >Add to Main Ingredients</button>
-                <button type="button" id="add_ingr"  >Add new to DB</button>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-4 mb-0">
-                {{ form.main_ingredients|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-2 mb-0">
-                {{ form.category|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-2 mb-0">
-                {{ form.meal_category|as_crispy_field }}
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-2 mb-0">
-                {{ form.cuisine|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-0">
-                {{ form.in_book|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-1 mb-0">
-                {{ form.page|as_crispy_field }}
-            </div>
-        </div>
+        <table>
+        {% for field in form.visible_fields %}
+        <tr>
+            <td>
+            {% if field.name == 'main_ingredients'%}
+                <input type='text' id="ingr" class = "ui-widget form-control">
+                <button type="button" id="add_button"  >Add Main Ingredients</button>
+                <button type="button" id="add_ingr"  >Add DB Ingr</button>
+            {% endif %}
+
+            {{ field.errors }}
+            {{ field|as_crispy_field }}
+            {{ field.help_text }}
+            </td>
+          </tr>
+        {% endfor %}
+        </table>
         <input type='submit' class="btn btn-secondary" value = 'Submit'>
     </form>
 
@@ -125,7 +104,7 @@ $("#add_ingr").click(function (e) {
             success: function (response) {
 
                 if(!response["valid"]){
-                    alert("You cannot add that item");
+                    alert("You cannot that item");
                     $("#ingr").focus();
                 }
             },
@@ -137,6 +116,11 @@ $("#add_ingr").click(function (e) {
 
 });
 
+
+
+
 </script>
+
+
 {% endblock content%}
 

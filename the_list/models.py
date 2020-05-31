@@ -6,6 +6,17 @@ from django.conf import settings
 
 
 # ## Model Managers ## #
+class CatManager(models.Manager):
+    def all(self):
+        qs = super(CatManager, self).all()
+        return qs
+
+
+class CuisineManager(models.Manager):
+    def all(self):
+        qs = super(CuisineManager, self).all()
+        return qs
+
 
 class RecipeManager(models.Manager):
     def all(self):
@@ -110,7 +121,35 @@ class Book(models.Model):
         # indexes = [models.Index(fields=['name', 'for_group'])]
 
     def __str__(self):
-        return f'{self.pk}. {self.name.title()}'
+        return f'{self.name.title()}'
+
+    def __repr__(self):
+        return self.name.title()
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=50, unique=True, blank=False)
+    objects = CatManager()
+
+    class Meta:
+        ordering = ['name']
+
+    def __str__(self):
+        return f'{self.name.title()}'
+
+    def __repr__(self):
+        return self.name.title()
+
+
+class Cuisine(models.Model):
+    name = models.CharField(max_length=50, unique=True, blank=False)
+    objects = CuisineManager()
+
+    class Meta:
+        ordering = ['name']
+
+    def __str__(self):
+        return f'{self.name.title()}'
 
     def __repr__(self):
         return self.name.title()
@@ -163,7 +202,8 @@ class Recipe(models.Model):
     description = models.CharField(max_length=100, blank=True)
     main_ingredients = models.CharField(max_length=200, unique=False, blank=True)
     category = models.CharField(max_length=50, blank=True)
-    #quantity = models.CharField(max_length=30, blank=True, null=True, default='1')
+    meal_category = models.ForeignKey(Category, blank=True, null=True, on_delete=models.CASCADE)
+    cuisine = models.ForeignKey(Cuisine, null=True, on_delete=models.PROTECT)
     in_book = models.ForeignKey(Book, blank=True, null=True, on_delete=models.CASCADE)
     page = models.IntegerField(blank=True, null=False)
 
@@ -183,6 +223,20 @@ class Recipe(models.Model):
         return reverse("recipe:recipe_detail", args=[str(self.id)])
 
 
+class Comments(models.Model):
+        made_on = models.DateField(auto_now_add=True, auto_now=False)
+        tried_it = models.BooleanField(default=False, null=False)
+        comment_made = models.CharField(max_length=150, unique=False, blank=True, null=False)
+        about_recipe = models.ForeignKey(Recipe, null=False, on_delete=models.CASCADE)
+
+        class Meta:
+            ordering = ['-made_on']
+
+        def __str__(self):
+            return f'{self.made_on} : {self.comment_made}'
+
+        def __repr__(self):
+            return f'{self.comment_made}'
 
     # @property
     # def to_purchase(self):
