@@ -244,7 +244,7 @@ def recipe_detail(request, pk=None):
         form = RecipeForm(request.POST, instance=obj)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('recipe:recipe_filter'))
+            return HttpResponseRedirect(reverse('recipe:recipe_list'))
 
     template_name = 'recipe_detail.html'
     context = {
@@ -296,7 +296,7 @@ def recipe_list(request):
 
 def recipe_filter(request):
     """
-    shows the list of unfulfilled items in the particular list
+    shows the list of recipes filter but no pagination
     """
     notice = ''
     logging.getLogger("info_logger").info(f"user = {request.user.username}")

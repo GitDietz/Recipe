@@ -94,6 +94,12 @@ class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
         fields = ('__all__')
+        widgets = {'stars': forms.NumberInput(attrs={
+            'id': 'star_field',
+            'style': 'width:60px',
+            'oninput': 'limit_value(5)'
+        }),
+        }
 
 
 class ContactForm(forms.Form):

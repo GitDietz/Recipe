@@ -26,9 +26,9 @@
         </div>
         <div class="form-row">
             <div class="form-group col-md-3 mb-0">
-                <input type='text' id="ingr" class = "ui-widget form-control" placeholder="Find ingredients"></div>
+                <input type='text' id="ingr" class = "ui-widget form-control" placeholder="Find ingredients to add"></div>
             <div class="form-group col-md-2 mb-0">
-                <button type="button" id="add_button"  >Add to Main Ingredients</button>
+                <button type="button" id="add_button"  >Add to Main Ingr</button>
                 <button type="button" id="add_ingr"  >Add new to DB</button>
             </div>
         </div>
@@ -36,11 +36,16 @@
             <div class="form-group col-md-4 mb-0">
                 {{ form.main_ingredients|as_crispy_field }}
             </div>
-            <div class="form-group col-md-2 mb-0">
-                {{ form.category|as_crispy_field }}
+            <div class="form-group col-md-1 mb-0 stars">
+                {{ form.stars|as_crispy_field }}
             </div>
             <div class="form-group col-md-2 mb-0">
                 {{ form.meal_category|as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+                {{ form.notes|as_crispy_field }}
             </div>
         </div>
         <div class="form-row">
@@ -114,6 +119,7 @@ function titleCase(str) {
   }).join(' ');
 }
 
+
 $("#add_ingr").click(function (e) {
         e.preventDefault();
         var add_val = titleCase(document.getElementById("ingr").value);
@@ -136,6 +142,16 @@ $("#add_ingr").click(function (e) {
     })
 
 });
+
+</script>
+<script type="text/javascript">
+    function limit_value(max_value) {
+        var field = document.getElementById("star_field");
+        //var max_value = 5;
+    if (parseInt(field.value) > max_value) {
+        alert("Can't exceed 5");
+    }
+}
 
 </script>
 {% endblock content%}

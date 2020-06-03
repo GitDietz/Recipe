@@ -8,7 +8,8 @@ class RecipeFilter(django_filters.FilterSet):
         model = Recipe
         fields = {
             'name': ['icontains', ],
-            'category': ['icontains', ],
+            'cuisine__name': ['icontains', ],
+            'meal_category__name' : ['icontains', ],
             #'in_book': ['icontains', ],
         }
 

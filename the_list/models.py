@@ -1,4 +1,5 @@
 from admin_auto_filters.filters import AutocompleteFilter
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.urls import reverse
 from django.db import models
 from django.db.models.functions import Lower
@@ -201,7 +202,8 @@ class Recipe(models.Model):
     name = models.CharField(max_length=150, unique=False, blank=False)
     description = models.CharField(max_length=100, blank=True)
     main_ingredients = models.CharField(max_length=200, unique=False, blank=True)
-    category = models.CharField(max_length=50, blank=True)
+    notes = models.CharField(max_length=100, blank=True)
+    stars = models.PositiveSmallIntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
     meal_category = models.ForeignKey(Category, blank=True, null=True, on_delete=models.CASCADE)
     cuisine = models.ForeignKey(Cuisine, null=True, on_delete=models.PROTECT)
     in_book = models.ForeignKey(Book, blank=True, null=True, on_delete=models.CASCADE)
