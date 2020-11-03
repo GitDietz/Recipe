@@ -207,6 +207,7 @@ class Recipe(models.Model):
     meal_category = models.ForeignKey(Category, blank=True, null=True, on_delete=models.CASCADE)
     cuisine = models.ForeignKey(Cuisine, null=True, on_delete=models.PROTECT)
     in_book = models.ForeignKey(Book, blank=True, null=True, on_delete=models.CASCADE)
+    recipe_file = models.FileField(upload_to='data', blank=True, null=True)
     page = models.IntegerField(blank=True, null=False)
 
     objects = RecipeManager()

@@ -6,7 +6,7 @@ app_name = 'the_list'
 
 urlpatterns = [
     path('list/', recipe_list, name='recipe_list'),
-    #path('filter/', recipe_filter, name='recipe_filter'),
+    #re_path('filter/', recipe_filter, name='recipe_filter'),
     re_path('recipe/(?P<pk>\d+)', recipe_detail, name='recipe_detail'),
     # path('create/', shop_create, name='shop_create'),
     # #url(r'bogger/$', shop_create, name='shop_bogger'),

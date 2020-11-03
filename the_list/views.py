@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.core import serializers
 from django.core.exceptions import ValidationError
+from django.core.files.storage import FileSystemStorage
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.db import DatabaseError
@@ -265,13 +266,12 @@ def recipe_list(request):
     recipes = Recipe.objects.all().order_by('name')
     #recipes = Recipe.objects.all().filter(main_ingredients__isnull=True).order_by('name')
     # need to extract the part of the GET
-    print(request.GET)
     # remove this to a function later
     get_dict = request.GET.copy()
     try:
         del get_dict['page']
     except KeyError:
-        print('No page indicator on GET')
+        pass
 
     recipes_filtered = RecipeFilter(get_dict, queryset=recipes)
     recipe_qs = recipes_filtered.qs
