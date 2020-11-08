@@ -7,7 +7,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.db import DatabaseError
 from django.db.models import Q
-from django.http import JsonResponse
+
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, Http404, redirect, HttpResponse
 from django.urls import reverse
 from urllib.parse import urlencode
@@ -15,13 +15,10 @@ from urllib.parse import urlencode
 import csv, io, json
 import logging
 
-from .filter import RecipeFilter
-from .forms import *
-from .models import Book, Recipe, FoodGroup
+from the_list.filter import RecipeFilter
+from the_list.forms import *
+from the_list.models import Book, Recipe, FoodGroup
 
-from lcore.utils import *
-
-from datetime import date
 
 #  #################################  Recipe #################################
 
@@ -65,51 +62,6 @@ def foodgroup_list(request):
         'new_item_url': add_url,
     }
     return render(request,template,context)
-
-
-def indexView(request):
-    # url = friend/'
-    form = FriendForm()
-    friends = Friend.objects.all()
-    return render(request, "index.html", {"form": form, "friends": friends})
-
-
-def checkNickName(request):
-    """feature of the postfriend function, not part of recipe project per se"""
-    # request should be ajax and method should be GET.
-    if request.is_ajax and request.method == "GET":
-        # get the nick name from the client side.
-        nick_name = request.GET.get("nick_name", None)
-        # check for the nick name in the database.
-        if Friend.objects.filter(nick_name = nick_name).exists():
-            # if nick_name found return not valid new friend
-            return JsonResponse({"valid":False}, status = 200)
-        else:
-            # if nick_name not found, then user can create a new friend.
-            return JsonResponse({"valid":True}, status = 200)
-
-    return JsonResponse({}, status = 400)
-
-
-def postFriend(request):
-    # url = friend/ajax/ '
-    # request should be ajax and method should be POST.
-    if request.is_ajax and request.method == "POST":
-        # get the form data
-        form = FriendForm(request.POST)
-        # save the data and after fetch the object in instance
-        if form.is_valid():
-            instance = form.save()
-            # serialize in new friend object in json
-            ser_instance = serializers.serialize('json', [ instance, ])
-            # send to client side.
-            return JsonResponse({"instance": ser_instance}, status=200)
-        else:
-            # some form errors occured.
-            return JsonResponse({"error": form.errors}, status=400)
-
-    # some error occured
-    return JsonResponse({"error": ""}, status=400)
 
 
 def ingredient_detail(request, pk=None):
@@ -322,42 +274,6 @@ def recipe_filter(request):
     return render(request, 'filter_list.html', context)
 
 
-# @login_required
-# def recipe_detail(request, pk):
-#     """
-#     allows the edit of the item if its the requestor or the leader/s of the group
-#     :param pk: for the instance of the item
-#     :param request:
-#     :return: divert to shoplist
-#     """
-#     logging.getLogger("info_logger").info(f"user = {request.user.username}")
-#     item = get_object_or_404(Recipe, pk=pk)
-#     active_list = item.in_group.id
-#     user_is_leader = False
-#     if request.user in item.in_group.leaders.all():
-#         user_is_leader = True
-#
-#     if request.user == item.requested or user_is_leader:
-#         if request.method == "POST":
-#             logging.getLogger("info_logger").info(f"Posted form | user = {request.user.username}")
-#             form = ItemForm(request.POST, instance=item, list=active_list)
-#             if form.is_valid():
-#                 logging.getLogger("info_logger").info(f"valid form submitted | user = {request.user.username}")
-#                 form.save()
-#                 return HttpResponseRedirect(reverse('shop:shop_list'))
-#
-#         template_name = 'item_detail.html'
-#         context = {
-#             'title': 'Update Item',
-#             'form': ItemForm(instance=item, list=active_list),
-#             'notice': '',
-#         }
-#         return render(request, template_name, context)
-#     else:
-#         logging.getLogger("info_logger").info(f"diverting to the list view | user = {request.user.username}")
-#         return redirect('shop:shop_list')
-
-
 # ################################# Book #################################
 
 
@@ -437,51 +353,6 @@ def book_create(request):
     }
     return render(request, template_name, context)
 
-
-# @login_required
-# def merchant_update(request, pk):
-#     merchant = get_object_or_404(Merchant, pk=pk)
-#     list = merchant.for_group
-#     if request.method == "POST":
-#         logging.getLogger("info_logger").info(f'form submitted')
-#         form = MerchantForm(request.POST, instance=merchant, list=list.id, default=list)
-#         if form.is_valid():
-#             form.save()
-#             logging.getLogger("info_logger").info(f'complete - direct to list')
-#             return HttpResponseRedirect(reverse('shop:merchant_list'))
-#
-#     template_name = 'book.html'
-#     context = {
-#         'title': 'Update Merchant',
-#         'form': MerchantForm(instance=merchant, list=list.id, default=list),
-#         'notice': '',
-#     }
-#     return render(request, template_name, context)
-#
-#
-# @login_required
-# def merchant_delete(request, pk):
-#     merchant = get_object_or_404(Merchant, pk=pk)
-#     # users = User.objects.all()
-#     # if the user is a leader then allow to remove a group
-#
-#     if request.method == 'POST':
-#         this_group = merchant.for_group
-#         leader = is_user_leader(request, this_group.id)
-#         if leader:
-#             merchant.delete()
-#             logging.getLogger("info_logger").info(f'merchant deleted')
-#         return HttpResponseRedirect(reverse('shop:merchant_list'))
-#
-#     template_name = 'merchant_delete.html'
-#     context = {
-#         'title': 'Delete Merchant',
-#         'object': merchant,
-#         'notice': '',
-#     }
-#     return render(request, template_name, context)
-
-# @permission_required('admin.can_add_log_entry')
 
 def recipe_load(request):
     template = 'upload.html'

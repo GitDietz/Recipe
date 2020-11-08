@@ -129,6 +129,9 @@ class Book(models.Model):
 
 
 class Category(models.Model):
+    """
+    Like Main/starter / drink etc
+    """
     name = models.CharField(max_length=50, unique=True, blank=False)
     objects = CatManager()
 
@@ -143,6 +146,9 @@ class Category(models.Model):
 
 
 class Cuisine(models.Model):
+    """
+    Quisine names
+    """
     name = models.CharField(max_length=50, unique=True, blank=False)
     objects = CuisineManager()
 
@@ -208,7 +214,7 @@ class Recipe(models.Model):
     cuisine = models.ForeignKey(Cuisine, null=True, on_delete=models.PROTECT)
     in_book = models.ForeignKey(Book, blank=True, null=True, on_delete=models.CASCADE)
     recipe_file = models.FileField(upload_to='data', blank=True, null=True)
-    page = models.IntegerField(blank=True, null=False)
+    page = models.IntegerField(blank=True, null=True)
 
     objects = RecipeManager()
 
