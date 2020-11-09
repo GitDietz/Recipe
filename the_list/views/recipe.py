@@ -194,7 +194,7 @@ def recipe_detail(request, pk=None):
         obj = get_object_or_404(Recipe, pk=pk)
 
     if request.method == "POST":
-        form = RecipeForm(request.POST, instance=obj)
+        form = RecipeForm(request.POST, request.FILES, instance=obj)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('recipe:recipe_list'))
@@ -292,43 +292,6 @@ def book_list(request):
 
 
 # @login_required
-# def merchant_detail(request, id=None):
-#     # 10/1/20 mod to use list as part of merchant model
-#     logging.getLogger("info_logger").info(f'user = {request.user.username}')
-#     instance = get_object_or_404(Merchant, id=id)
-#     form = MerchantForm(request.POST or None)
-#     list_choices, user_list_options, list_active_no, active_list_name = get_user_list_property(request)
-#     title = 'Add or Edit Merchant'
-#     notice = ''
-#     if request.method == 'POST' and form.is_valid():
-#         logging.getLogger("info_logger").info(f'valid form')
-#
-#         qs = Merchant.objects.all()
-#         form.save(commit=False)
-#         this_found = qs.filter(Q(name__iexact=Merchant.name))
-#         if this_found:
-#             logging.getLogger("info_logger").info(f'Merchant already in list')
-#             notice = 'Already listed ' + Merchant.name.title()
-#         else:
-#             logging.getLogger("info_logger").info(f'ok will add {Merchant.name} to list')
-#             Merchant.name = Merchant.title()
-#             # Adding list reference
-#             Merchant.for_group = active_list_name
-#             Merchant.save()
-#             notice = 'Added ' + Merchant.name
-#
-#         return redirect('shop:merchant_list')
-#
-#     context = {
-#         'title': title,
-#         'form': form,
-#         'notice': notice,
-#         'instance': instance
-#     }
-#     return render(request, 'book.html', context)
-
-
-# @login_required
 def book_create(request):
     form = BookForm(request.POST or None)
     if request.method == "POST":
@@ -352,73 +315,6 @@ def book_create(request):
         'notice': '',
     }
     return render(request, template_name, context)
-
-
-def recipe_load(request):
-    template = 'upload.html'
-    message = ''
-    context = {'title': 'set loading file',
-               'message': message,
-               }
-    if request.method == "GET":
-        return render(request, template, context)
-
-    csv_file = request.FILES['file']
-
-    if not csv_file.name.endswith('.csv'):
-        message = 'Only CSV'
-
-    this_book = get_object_or_404(Book, pk=3)
-    data_set = csv_file.read().decode('UTF-8')
-    io_string = io.StringIO(data_set)
-    next(io_string)
-    for column in csv.reader(io_string, delimiter=',', quotechar='|'):
-        if int(column[1]) > 62:
-            try:
-                # _, created = Recipe.objects.update_or_create(name=column[0],
-                #                                         description=column[1],
-                #                                         main_ingredient=column[2],
-                #                                         category=column[3],
-                #                                         in_book=this_book,
-                #                                         page=column[4])
-                print(column)
-                # obj = Recipe.objects.create_name_page(name=column[0].strip(),
-                #                                       # description='',
-                #                                       # main_ingredient='',
-                #                                       # category='',
-                #                                       in_book=this_book,
-                #                                       page=int(column[1]))
-                _, created = Recipe.objects.get_or_create(name=column[0].strip(),
-                                                             description='',
-                                                             main_ingredient='',
-                                                             category='',
-                                                             in_book=this_book,
-                                                             page=int(column[1]))
-            except:
-                print(f'{Exception} on row with name {column[0]}')
-
-    context = {}
-    return render(request, template, context)
-
-
-def load_ingredients(request):
-    """using the data from recipes to split values and add them to ingredients list"""
-    recipes = Recipe.objects.all()
-    ingrs = list(Ingredient.objects.all().values_list('name', flat=True))
-    for recipe in recipes:
-        if recipe.description != "":
-            if '/' in recipe.description:
-                x = recipe.description.split('/')
-            else:
-                x = recipe.description.split()
-            print(x)
-            if x:
-                for item in x:
-                    if item.strip() not in ingrs and item != 'and':
-                        ingrs.append(item)
-                        _, created = Ingredient.objects.get_or_create(name=item.strip())
-
-    return render(request, 'done.html',{})
 
 
 def home(request):

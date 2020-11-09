@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     #local
     'the_list',
     'act',
+    'django_cleanup.apps.CleanupConfig',
     ]
 
 SITE_ID = 1
@@ -169,7 +170,7 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
 
 #MEDIA
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = '/media/'
 
 # LOGGING CONFIG

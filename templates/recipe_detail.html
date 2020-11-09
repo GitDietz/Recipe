@@ -7,7 +7,7 @@
 <div>
 
     <h2>Recipe detail</h2>
-    <form method='POST' action="" >
+    <form method='POST' action="" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.non_field_errors }}
 

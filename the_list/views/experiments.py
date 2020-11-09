@@ -1,6 +1,10 @@
+from django.core import serializers
 from django.http import JsonResponse
+from django.shortcuts import render
 
 
+from ..forms import FriendForm
+from ..models import Friend
 
 def indexView(request):
     # url = friend/'
