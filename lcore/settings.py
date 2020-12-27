@@ -113,7 +113,7 @@ WSGI_APPLICATION = 'lcore.wsgi.application'
 DATABASES = {
     'advanced': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'listapp',
+        'NAME': 'recipe',
         'USER': config('DB_USER_ADMIN'),
         'PASSWORD': config('DB_ADMIN_PW'),
         'HOST': 'localhost',

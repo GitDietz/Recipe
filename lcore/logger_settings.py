@@ -1,6 +1,9 @@
 import os
 
-# LOG_ROOT = os.path.join(BASE_DIR, 'Logs')
+from django.conf import settings
+
+log_folder = settings.LOG_ROOT
+# LOG_ROOT = os.path.join(log_folder, 'Logs')
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -21,7 +24,7 @@ LOGGING = {
             'class': 'logging.handlers.TimedRotatingFileHandler',
             'when': 'midnight',
             'interval': 1,
-            'filename': 'logs/ErrorLoggers.log',
+            'filename': os.path.join(log_folder, 'ErrorLoggers.log'),
             'formatter': 'large',
         },
         'info_file': {
@@ -29,7 +32,7 @@ LOGGING = {
             'class': 'logging.handlers.TimedRotatingFileHandler',
             'when': 'midnight',
             'interval': 1,
-            'filename': 'logs/InfoLoggers.log',
+            'filename': os.path.join(log_folder, 'InfoLoggers.log'),
             'formatter': 'med',
             },
     },
