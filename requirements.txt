@@ -11,7 +11,7 @@ django-markdown-deux==1.0.5
 django-pagedown==1.0.6
 django-cleanup==5.1.0
 macholib==1.9
-markdown2==2.3.8
+markdown2==2.4.0
 MarkupSafe==1.1.1
 modulegraph==0.16
 Pillow==8.1.1
